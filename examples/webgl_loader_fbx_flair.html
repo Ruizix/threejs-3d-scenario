@@ -45,11 +45,11 @@
 			const clock = new THREE.Clock();
 
 			const params = {
-				asset: 'Flair'
+				asset: 'House Dancing'
 			};
 
 			const assets = [
-				'Flair',
+				'House Dancing',
 				'morph_test'
 			];
 
@@ -90,7 +90,7 @@
 				scene.add( mesh );
 
 				const grid = new THREE.GridHelper( 2000, 20, 0x000000, 0x000000 );
-				grid.material.opacity = 0.2;
+				grid.material.opacity = 0.0;
 				grid.material.transparent = true;
 				scene.add( grid );
 			
@@ -125,7 +125,7 @@
 
 				// --------------------------------------------------------------
 				const rgbeLoader = new RGBELoader();
-				rgbeLoader.load('models/rgbe/blue_hour_8k.hdr', function (texture) {
+				rgbeLoader.load('models/rgbe/fondo.hdr', function (texture) {
 					texture.mapping = THREE.EquirectangularReflectionMapping;
 					scene.background = texture;
 					scene.environment = texture;
@@ -136,11 +136,11 @@
 
 				const sound = new Audio(listener);
 				const audioLoader = new AudioLoader();
-				audioLoader.load('models/rgbe/Snow-Informer.mp3', function (buffer) {
+				audioLoader.load('models/rgbe/scarr.mp3', function (buffer) {
 					console.log("Audio cargado exitosamente");
 					sound.setBuffer(buffer);
 					sound.setLoop(true);
-					sound.setVolume(0.5);
+					sound.setVolume(0.2);
 					sound.play();
 				});
 				// --------------------------------------------------------------
@@ -202,11 +202,12 @@
 							// -----------------------------------------------------------
 							// Aplicar un material de agua o translúcido al modelo
 							child.material = new THREE.MeshStandardMaterial({
-								color: 0xff3300,  // Color rojo acuático
-								transparent: true,
-								opacity: 0.9,
-								roughness: 0.5,
-								metalness: 0.7
+								color: 0xC0C0C0, // Azul base
+								roughness: 0.1,  // Suavidad casi brillante
+								metalness: 1.0,  // Totalmente metálico
+								emissive: 0x000022, // Ligero brillo frío
+								emissiveIntensity: 0.2, // Intensidad del brillo
+								wireframe: true
 							});
 							// -----------------------------------------------------------
 
